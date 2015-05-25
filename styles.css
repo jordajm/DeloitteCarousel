@@ -1,0 +1,262 @@
+.infographic-iframe {
+  height: 440px !important;
+}
+
+.temp-wrapper {
+	/*padding-top: 150px;*/
+}
+
+.cs-body {
+	color: rgb(55, 55, 55);
+	height: 440px;
+	max-width: 750px;
+	margin: auto;
+	position: relative;
+	overflow: hidden;
+	background-color: grey;
+	/*background-image: url('https://cdn1.vox-cdn.com/thumbor/lv0z4ucdoLO0ef27GPqJ-Cwlsbk=/0x0:3000x2000/695x464/filters:saturation(0.2):colorize(35,40,50,79A8B2):blur(0,0.5)/cdn0.vox-cdn.com/uploads/chorus_image/image/33856653/131730343.0.jpg');
+	background-repeat:no-repeat;
+	background-size:contain;
+	background-position:center;*/
+}
+
+.cs-container {
+	height: 423px;
+	overflow-y: hidden;
+}
+
+.cs-carousel {
+	max-width: 100%;
+}
+
+.cs-card-container {
+	background-color: green;
+}
+
+.cs-embed-container {
+	position: relative; 
+	padding-bottom: 56.25%; 
+	height: 0; 
+	overflow: hidden; 
+	max-width: 100%
+}
+
+.cs-embed-container iframe, .cs-embed-container object, .cs-embed-container embed { 
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	width: 100%; 
+	height: 100%;
+}
+
+.cs-card-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 35px;
+	background-color: yellow;
+}
+
+/*TODO - Widen the count container if there are more than 9 cards to prevent text wrapping*/
+.cs-top-count-container {
+	display: block;
+	width: 110px;
+	margin: auto;
+}
+
+.cs-top-count-float {
+	
+}
+
+.cs-top-prev-btn {
+	left: 20px;
+  	position: absolute;
+}
+
+.cs-top-next-btn {
+	top: 1px;
+	right: 20px;
+	position: absolute;
+}
+
+.cs-top-count {
+	vertical-align: top;
+	font-size: 18px;
+	font-weight: bold;
+	position: relative;
+  	top: 6px;
+}
+
+.cs-card-nav-btn:hover {
+	cursor: pointer;
+}
+
+.cs-nav-disabled {
+	display: none !important;
+}
+
+.cs-nav-disabled:hover {
+	cursor: default !important;
+}
+
+.cs-card-nav-btn {
+	font-size: 50px;
+	line-height: 27px;
+}
+
+.cs-top-bold {
+	vertical-align: top;
+	font-weight: bold;
+	position: relative;
+  	top: 7px;
+  	font-size: 18px;
+}
+
+.cs-top-of {
+	vertical-align: top;
+	font-size: 13px;
+  	margin-right: 2px;
+  	position: relative;
+  	top: 10px;
+}
+
+.cs-card-content {
+	position: relative;
+	width: 100%;
+	height: 423px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.owl-controls .owl-prev, .owl-controls .owl-next {
+	position: absolute;
+	top: 32%;
+	width: 12%;
+  	height: 160px;
+  	opacity: 0;
+  	background-color: lightgrey;
+    border-radius: 10px;
+    background-position: center center;
+
+  	-webkit-transition: opacity 500ms ease-out;
+    -moz-transition: opacity 500ms ease-out;
+    -o-transition: opacity 500ms ease-out;
+    transition: opacity 500ms ease-out;
+}
+
+.cs-body:hover .owl-controls .owl-prev {
+	opacity: 0.4;
+}
+
+.cs-body:hover .owl-controls .owl-next {
+	opacity: 0.4;
+}
+
+.owl-controls .owl-prev {
+	left: 1%;
+}
+
+.owl-controls .owl-next {
+	right: 1%;
+}
+
+.owl-prev:hover {
+	opacity: 0.7 !important;
+}
+
+.owl-next:hover {
+	opacity: 0.7 !important;
+}
+
+.owl-prev {
+	background-image: url('https://dl.dropboxusercontent.com/u/213392662/DUPressCarousel/dependencies/chevron-left.png');
+	background-repeat: no-repeat;
+	background-size: 50%;
+}
+
+.owl-next {
+	background-image: url('https://dl.dropboxusercontent.com/u/213392662/DUPressCarousel/dependencies/chevron-right.png');
+	background-repeat: no-repeat;
+	background-size: 50%;
+}
+
+.cs-bottom-nav {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 60px;
+	background-color: yellow;
+	z-index: 1;
+}
+
+.cs-bottom-nav-btn {
+	font-size: 50px;
+	line-height: 50px;
+}
+
+.cs-count {
+	font-size: 18px;
+	width: 120px;
+	margin: auto;
+}
+
+.cs-count-margin-left {
+	margin-left: 20px;
+}
+
+.cs-bottom-total {
+	margin-right: 20px;
+}
+
+.cs-bottom-count {
+	position: relative;
+  	top: 15px;
+  	vertical-align: top;
+}
+
+.cs-bottom-nav-btn:hover {
+	cursor: pointer;
+}
+
+.iScrollVerticalScrollbar {
+	position: absolute;
+	z-index: 9999;
+	width: 9px;
+	bottom: 62px;
+	top: 2px;
+	right: 1px;
+	overflow: hidden;
+}
+
+.iScrollIndicator {
+	box-sizing: border-box;
+	position: absolute;
+	border-radius: 5px;
+	width: 100%;
+	transition-duration: 0ms;
+	-webkit-transition-duration: 0ms;
+	display: block;
+	height: 263px;
+	transform: translate(0px, 0px) translateZ(0px);
+	transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+	-webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+	background: rgba(0, 0, 0, 0.498039);
+}
+
+.cs-mobile-launcher {
+	height: 150px;
+	margin: auto;
+	background-color: lightgrey;
+}
+
+.cs-close-btn {
+	font-weight: bold;
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+}
+
+.cs-close-btn:hover {
+	cursor: pointer;
+}

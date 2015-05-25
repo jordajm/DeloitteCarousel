@@ -1,0 +1,34 @@
+{					
+	"config": {
+		"navigation": "Auto And Manual",
+		"autoNavInterval": "5000",
+		"maxWidth": "750px",
+		"maxHeight": "440px",
+		"border": "none"
+	},
+	
+	"contentItems": [
+		{
+			"videoURL": "https://www.youtube.com/embed/GeIHJ-i7yVk"
+		},
+		{
+			"imageURL": "https://dl.dropboxusercontent.com/u/213392662/LongsPic.jpg",
+			"captionTextToggle": "true",
+			"captionTextFont": "serif",
+			"captionTextSize": "12px",
+			"captionTextColor": "#fff",
+			"captionBackgroundColor": "rgba(0,0,0,0.5)",
+			"captionPosition": "bottom",
+			"captionContent": "Lorem ipsum dolor sit amet, velit eu, tellus litora lacus volutpat, ut egestas tempus taciti ultricies. Massa massa ut urna eget nisl. Etiam justo pellentesque, temporibus praesent, dignissim id, curabitur dignissim gravida id. Pellentesque metus erat lacinia nec varius, cum nulla pede aliquet, interdum turpis cum risus venenatis neque id, maecenas et ante lacinia vitae a vitae."
+
+		},
+		{
+			"imageURL": "https://dl.dropboxusercontent.com/u/213392662/beach.jpg"
+	
+		},
+		{
+			"videoURL": "https://www.youtube.com/embed/xlXk49Mh7go",
+			"autoStartMedia": "true"
+		}
+	]
+}
