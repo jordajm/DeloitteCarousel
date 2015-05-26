@@ -1,71 +1,61 @@
-(function($) {
-  
-    var App = {
+$(document).ready(function() {
 
-        csConfig: undefined,
-        csCarousel: undefined,
-        cardCount: undefined,
-        currentCard: undefined,
-        maxWidth: undefined,
-        minWidth: undefined,
-        autoplay: undefined,
-        autoplayTimeout: undefined,
-        border: undefined,
-        autoStartMedia: [],
-        csOptions: {
+    var csConfig,
+        csCarousel,
+        cardCount,
+        currentCard,
+        maxWidth,
+        minWidth,
+        autoplay,
+        autoplayTimeout,
+        border,
+        autoStartMedia = [],
+        csOptions = {
             // loop:true,
             nav:true,
             autoHeight:true,
             items: 1,
-            autoplay: undefined,
-            autoplayTimeout: undefined,
+            autoplay: autoplay,
+            autoplayTimeout: autoplayTimeout,
             autoplayHoverPause: true,
-        },
- 
-    /**
-    * Init Function
-    */
-    init: function() {
-        App.getConfig();
-    },
+        };
 
-    getConfig: function() {
-        $.get('https://dl.dropboxusercontent.com/u/213392662/DUPressCarousel/localmotors-part1.json', function(data){ 
-        }).success(function(data) {
-            App.csConfig = JSON.parse(data);
-            console.log(App.csConfig);
-            App.parseConfig(App.csConfig);
-        }).fail(function() {
-            console.log('There was an error loading Config data for the Card Stack widget');
-        });
-    },
+    $.get('https://dl.dropboxusercontent.com/u/213392662/DUPressCarousel/localmotors-part1.json', function(data){ 
+    }).success(function(data) {
+        csConfig = JSON.parse(data);
+        console.log(csConfig);
+        parseConfig();
+    }).fail(function() {
+        console.log('There was an error loading Config data for the Card Stack widget');
+    });
 
-    parseConfig: function(config) {
-        if(config.config.autoNavigation == 'true'){
-            App.csOptions.autoplay = true;
-            if(config.config.autoNavInterval){
-                App.csOptions.autoplayTimeout = parseInt(config.config.autoNavInterval);
+    function parseConfig() {
+
+        if(csConfig.config.autoNavigation == 'true'){
+            autoplay = true;
+            if(csConfig.config.autoNavInterval){
+                autoplayTimeout = parseInt(csConfig.config.autoNavInterval);
             }else{
-                App.csOptions.autoplayTimeout = 5000;
+                autoplayTimeout = 5000;
             }
         }else{
-            App.csOptions.autoplay = false;
+            autoplay = false;
         }
 
-        if(config.maxWidth && config.maxWidth != '750px'){
-            App.maxWidth = config.maxWidth;
+        if(csConfig.maxWidth && csConfig.maxWidth != '750px'){
+            maxWidth = csConfig.maxWidth;
         }
 
-        if(config.minWidth && config.minWidth != '440px'){
-            App.minWidth = config.minWidth;
+        if(csConfig.minWidth && csConfig.minWidth != '440px'){
+            minWidth = csConfig.minWidth;
         }
 
-        if(config.border && config.border != 'none'){
-            App.border = config.border;
+        if(csConfig.border && csConfig.border != 'none'){
+            border = csConfig.border;
         }
 
-        var contentItems = config.contentItems;
-        var contentLength = config.contentItems.length;
+        var contentItems = csConfig.contentItems;
+        var contentLength = csConfig.contentItems.length;
         for(var i = 0; i < contentLength; i++){
             var thisItem = contentItems[i];
             var itemHTML;
@@ -99,69 +89,74 @@
 
             // Should this item be played automatically when it comes into view? - Create an array that can be looped through each time the carousel changes selected item
             if(thisItem.autoStartMedia && thisItem.autoStartMedia == 'true'){
-                App.autoStartMedia.push('true');
+                autoStartMedia.push('true');
             }else{
-                App.autoStartMedia.push('false');
+                autoStartMedia.push('false');
             }
 
             $('.cs-carousel').append(itemHTML);
         }
 
-        App.renderCsCarousel();
-    },
+        renderCsCarousel();
 
-    renderCsCarousel: function() {
-        App.csCarousel = $('.cs-carousel').owlCarousel(App.csOptions);
+    }
+
+    function renderCsCarousel() {
+        csCarousel = $('.cs-carousel').owlCarousel(csOptions);
 
         $('.cs-prev-btn').click(function(){
-            App.csCarousel.trigger('prev.owl.carousel')
+            csCarousel.trigger('prev.owl.carousel')
         });
 
         $('.cs-next-btn').click(function(){
-            App.csCarousel.trigger('next.owl.carousel')
+            csCarousel.trigger('next.owl.carousel')
         });
 
-        App.csCarousel.on('changed.owl.carousel', function() {
+        csCarousel.on('changed.owl.carousel', function() {
             setTimeout(function(){
-                App.getCurrentCardIndex();
+                getCurrentCardIndex();
             },0);
         });
 
-        setTimeout(function(){
-            App.countCards();
-            App.getCurrentCardIndex();
-        },0);
+        (function countCards() {
+            cardCount = $('.cs-card-content').length;
+            $('.total-card-count').html(cardCount);
+        })();
 
-    },
+        function getCurrentCardIndex() {
+            currentCard = $('.owl-stage').find('.active').closest('.owl-item').index() + 1;
+            $('.current-card-index').html(currentCard);
+            addDisabledStates();
+        };
+        getCurrentCardIndex();
 
-    countCards: function() {
-        App.cardCount = $('.cs-card-content').length;
-    },
+        function addDisabledStates() {
+            if(currentCard == 1){
+                $('.owl-prev').fadeOut('slow');
+            }else{
+                $('.owl-prev').fadeIn('slow');
+            }
 
-    getCurrentCardIndex: function() {
-        App.currentCard = $('.owl-stage').find('.active').closest('.owl-item').index() + 1;
-        App.addDisabledStates();
-    },
-
-    addDisabledStates: function() {
-        if(App.currentCard == 1){
-            $('.owl-prev').fadeOut('slow');
-        }else{
-            $('.owl-prev').fadeIn('slow');
+            if(currentCard == cardCount){
+                $('.owl-next').fadeOut('slow');
+            }else{
+                $('.owl-next').fadeIn('slow');
+            }
         }
 
-        if(App.currentCard == App.cardCount){
-            $('.owl-next').fadeOut('slow');
-        }else{
-            $('.owl-next').fadeIn('slow');
+    }; // Closing renderCsCarousel()
+
+    function resizeCardStack() {
+        var csWindowHeight = $(window).height();
+        if(csWindowHeight < 500){
+            $('.cs-body').css('height', csWindowHeight);
+            $('.cs-container').css('height', (csWindowHeight - 40));
         }
     }
+    resizeCardStack();
 
-}
-
-    $(function() {
-        App.init();
+    $(window).resize(function(){
+        resizeCardStack();
     });
 
-
-})(jQuery);
+}); 

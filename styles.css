@@ -260,3 +260,19 @@
 .cs-close-btn:hover {
 	cursor: pointer;
 }
+
+.audio-iframe {
+	position: absolute;
+    bottom: 0;
+    height: 40px;
+    border-radius: 5px;
+    left: 29%;
+}
+
+.audio-iframe video {
+    padding-top: 39px;
+}
+
+.caption-text {
+	padding: 2% 5%;
+}
