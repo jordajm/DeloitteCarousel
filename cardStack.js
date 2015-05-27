@@ -81,7 +81,7 @@
                 }else{
                     if(thisItem.audioURL){
                         // Image + Audio
-                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><iframe class="audio-iframe" src="' + thisItem.audioURL + '" frameborder="0" allowfullscreen></iframe></div>';
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><iframe style="border: none" src="' + thisItem.audioURL + '" height="100" width="640" scrolling="no"></iframe></div>';
                     }else{
                         // Image Only
                         itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"></div>';
@@ -130,6 +130,7 @@
         setTimeout(function(){
             App.countCards();
             App.getCurrentCardIndex();
+            App.setHeightOnRender();
         },0);
 
     },
@@ -154,6 +155,31 @@
             $('.owl-next').fadeOut('slow');
         }else{
             $('.owl-next').fadeIn('slow');
+        }
+    },
+
+    setHeightOnRender: function() {
+
+        App.setContentHeight();
+
+        $( window ).resize(function() {
+            App.setContentHeight();
+        });
+
+        var stageWidth = ($(window).width() * $('.cs-card-content').length);
+        $('.owl-stage').css('width', stageWidth);
+        $('.owl-item').css('width', $(window).width());
+
+    },
+
+    setContentHeight: function() {
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+        if(windowHeight > (windowWidth * .57)){
+            $('.cs-card-content').css('height', windowWidth * .57);
+        }else{
+            $('.cs-card-content').css({'height': windowHeight, 'width': (windowHeight / .57)});
+            $('.owl-next').css('left', (windowHeight / .57) - 125);
         }
     }
 
