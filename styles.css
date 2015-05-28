@@ -1,28 +1,8 @@
-.infographic-iframe {
-  height: 440px !important;
-}
-
-.temp-wrapper {
-	/*width: 600px;*/
-}
-
 .cs-body {
-	/*color: rgb(55, 55, 55);
-	width: 100%;
-	height: 440px;
-	max-width: 750px;
-	margin: auto;
-	position: relative;
-	overflow: hidden;
-	background-color: grey;*/
-	/*background-image: url('https://cdn1.vox-cdn.com/thumbor/lv0z4ucdoLO0ef27GPqJ-Cwlsbk=/0x0:3000x2000/695x464/filters:saturation(0.2):colorize(35,40,50,79A8B2):blur(0,0.5)/cdn0.vox-cdn.com/uploads/chorus_image/image/33856653/131730343.0.jpg');
-	background-repeat:no-repeat;
-	background-size:contain;
-	background-position:center;*/
+  min-height: 460px;
 }
 
 .cs-container {
-	/*height: 423px;*/
 	overflow-y: hidden;
 }
 
@@ -130,11 +110,23 @@
 	background-size: 100%;
 }
 
+.cs-caption {
+	position: absolute;
+	left: 0;
+	right: 0;
+	padding: 10px 25px;
+}
+
+.cs-caption-text {
+	margin: 0 !important;
+}
+
 .owl-controls .owl-prev, .owl-controls .owl-next {
 	position: absolute;
-	top: 32%;
+	top: 0;
 	width: 12%;
-  	height: 160px;
+	max-width: 90px;
+  	height: 100%;
   	opacity: 0;
   	background-color: lightgrey;
     border-radius: 10px;
@@ -159,13 +151,11 @@
 }
 
 .owl-controls .owl-prev {
-	left: 1%;
-	max-width: 90px;
+	left: 0;
 }
 
 .owl-controls .owl-next {
-	right: 1%;
-	max-width: 90px;
+	right: 0;
 }
 
 .owl-prev:hover {

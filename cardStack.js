@@ -11,6 +11,7 @@
         autoplay: undefined,
         autoplayTimeout: undefined,
         border: undefined,
+        audioSnippets: [],
         autoStartMedia: [],
         csOptions: {
             // loop:true,
@@ -71,17 +72,25 @@
             var itemHTML;
             if(thisItem.imageURL){
                 if(thisItem.captionTextToggle && thisItem.captionTextToggle == 'true'){
-                    if(thisItem.audioURL){
-                        // Image + Caption + Audio
-                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption"><p class="caption-text" style="color:' + thisItem.captionTextColor + ';background-color:' + thisItem.captionBackgroundColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';' + thisItem.captionPosition + ':0px">' + thisItem.captionContent + '</p></div><iframe class="audio-iframe" src="' + thisItem.audioURL + '" frameborder="0" allowfullscreen></iframe></div>';
+                    if(thisItem.podcastURL){
+                        // Image + Caption + Podcast
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption" style="' + thisItem.captionPosition + ':0px;background-color:' + thisItem.captionBackgroundColor + '"><p class="cs-caption-text" style="color:' + thisItem.captionTextColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';text-align:' + thisItem.captionTextAlign + '">' + thisItem.captionContent + '</p></div><iframe style="border:none;width:75%;position:absolute;bottom:0;left:12.5%" src="' + thisItem.podcastURL + '" height="100" width="640" scrolling="no"></iframe></div>';
+                    }else if(thisItem.audioSnippetURL){
+                        // Image + Caption + Audio Snippet which plays when slide comes into view
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption" style="' + thisItem.captionPosition + ':0px;background-color:' + thisItem.captionBackgroundColor + '"><p class="cs-caption-text" style="color:' + thisItem.captionTextColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';text-align:' + thisItem.captionTextAlign + '">' + thisItem.captionContent + '</p></div></div>';
+                        App.audioSnippets.push({slideNum: (i + 1), url: thisItem.audioSnippetURL});
                     }else{
                         // Image + Caption
-                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption"><p class="caption-text" style="color:' + thisItem.captionTextColor + ';background-color:' + thisItem.captionBackgroundColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';' + thisItem.captionPosition + ':0px">' + thisItem.captionContent + '</p></div></div>';
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption" style="' + thisItem.captionPosition + ':0px;background-color:' + thisItem.captionBackgroundColor + '"><p class="cs-caption-text" style="color:' + thisItem.captionTextColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';text-align:' + thisItem.captionTextAlign + '">' + thisItem.captionContent + '</p></div></div>';
                     }
                 }else{
-                    if(thisItem.audioURL){
-                        // Image + Audio
-                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><iframe style="border: none" src="' + thisItem.audioURL + '" height="100" width="640" scrolling="no"></iframe></div>';
+                    if(thisItem.podcastURL){
+                        // Image + Podcast
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><iframe style="border:none;width:75%;position:absolute;bottom:0;left:12.5%" src="' + thisItem.podcastURL + '" height="100" width="640" scrolling="no"></iframe></div>';
+                    }else if(thisItem.audioSnippetURL){
+                        // Image + Audio Snippet which plays when slide comes into view
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"></div>';
+                        App.audioSnippets.push({slideNum: (i + 1), url: thisItem.audioSnippetURL});
                     }else{
                         // Image Only
                         itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"></div>';
@@ -89,8 +98,8 @@
                 }
             }
             if(thisItem.audioURL && !thisItem.imageURL){
-                // Audio
-                itemHTML = '<div class="cs-card-content"><iframe src="' + thisItem.audioURL + '" frameborder="0" allowfullscreen></iframe></div>';
+                // Podcast only - no image or caption
+                itemHTML = '<div class="cs-card-content"><iframe style="border:none;width:75%;position:absolute;bottom:0;left:12.5%" src="' + thisItem.podcastURL + '" height="100" width="640" scrolling="no"></iframe></div>';
             }
             if(thisItem.videoURL){
                 // Video
@@ -135,12 +144,29 @@
 
     },
 
+    checkForAudioSnippets: function() {
+        var snippets = App.audioSnippets;
+        if(!snippets) return;
+
+        $('.cs-snippet').remove();
+
+        var snippetsLen = snippets.length;
+        for(var i = 0; i < snippetsLen; i++){
+            var thisSnippet = snippets[i];
+            if(thisSnippet.slideNum == App.currentCard){
+                var iframe = '<iframe class="audio-iframe cs-snippet" style="display:none" src="' + thisSnippet.url + '" frameborder="0" allowfullscreen></iframe>';
+                $('.cs-card-content:eq(' + (App.currentCard - 1) + ')').append(iframe);
+            }
+        }
+    },
+
     countCards: function() {
         App.cardCount = $('.cs-card-content').length;
     },
 
     getCurrentCardIndex: function() {
         App.currentCard = $('.owl-stage').find('.active').closest('.owl-item').index() + 1;
+        App.checkForAudioSnippets();
         App.addDisabledStates();
     },
 
@@ -175,11 +201,11 @@
     setContentHeight: function() {
         var windowWidth = $(window).width();
         var windowHeight = $(window).height();
-        if(windowHeight > (windowWidth * .57)){
-            $('.cs-card-content').css('height', windowWidth * .57);
+        if(windowHeight > (windowWidth * .5625)){
+            $('.cs-card-content').css('height', windowWidth * .5625);
         }else{
-            $('.cs-card-content').css({'height': windowHeight, 'width': (windowHeight / .57)});
-            $('.owl-next').css('left', (windowHeight / .57) - 125);
+            $('.cs-card-content').css({'height': windowHeight, 'width': (windowHeight / .5625)});
+            $('.owl-next').css('left', (windowHeight / .5625) - 90);
         }
     }
 

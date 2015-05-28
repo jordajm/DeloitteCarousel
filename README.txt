@@ -28,7 +28,8 @@
 		{
 			"imageURL": "https://dl.dropboxusercontent.com/u/213392662/beach.jpg",
 			"videoiFrame": "",
-			"audioURL": "",
+			"podcastURL": "",
+			"audioSnippetURL",
 			
 			"autoStartMedia": "false",
 
@@ -41,3 +42,4 @@
 			"captionContent": ""
 
 		},
+
