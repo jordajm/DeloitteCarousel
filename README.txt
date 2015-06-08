@@ -6,10 +6,7 @@
 		AutoNavInterval: 	==== Default: '3000' (3000ms = 3 seconds)
 							==== Options: Milliseconds delay for auto-navigation - not used for manual-only navigation
 
-		Width / Height: 	===== Defaults: maxWidth: 750px, maxHeight: 440px
-							===== Options: Any any interger followed by 'px'
-
-		Comment: 			==== Default: 'none'
+		border: 			==== Default: 'none'
 							==== Options: Standerd options for CSS attribute 'border' - e.g. '1px solid #000'",
 
 
@@ -27,7 +24,7 @@
 
 		{
 			"imageURL": "https://dl.dropboxusercontent.com/u/213392662/beach.jpg",
-			"videoiFrame": "",
+			"videoURL": "",
 			"podcastURL": "",
 			"audioSnippetURL",
 			

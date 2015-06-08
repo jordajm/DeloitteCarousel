@@ -1,0 +1,51 @@
+{					
+	"config": {
+		"autoNavigation": "false",
+		"autoNavInterval": "5000",
+		"maxWidth": "860px",
+		"maxHeight": "480px",
+		"border": "none"
+	},
+	
+	"contentItems": [
+		{
+			"imageURL": "https://dl.dropboxusercontent.com/u/213392662/beach.jpg"
+		},
+		{
+			"imageURL": "https://dl.dropboxusercontent.com/u/213392662/beach.jpg",
+			"audioSnippetURL": "http://dupress.php.islsandbox.com/wp-content/uploads/2015/05/TR-changes-happen-on-next-car.mp3"
+	
+		},
+		{
+			"imageURL": "https://dl.dropboxusercontent.com/u/213392662/beach.jpg",
+			"podcastURL": "http://html5-player.libsyn.com/embed/episode/id/3535906/height/100/width/640/theme/standard/direction/no/autoplay/no/autonext/no/thumbnail/yes/preload/no/no_addthis/no/"
+		},
+		{
+			"videoURL": "http://bcove.me/y3uhjlg4"
+		},
+		{
+			"imageURL": "https://dl.dropboxusercontent.com/u/213392662/beach.jpg",
+			"captionTextToggle": "true",
+			"captionTextFont": "serif",
+			"captionTextSize": "18px",
+			"captionTextColor": "#fff",
+			"captionTextAlign": "center",
+			"captionBackgroundColor": "rgba(0, 0, 0, 0.5)",
+			"captionPosition": "bottom",
+			"captionContent": "&#8220;And this is part of the economics of what the microfactory really is.  Itâ€™s an experience.&#8221;"
+
+		},
+		{
+			"imageURL": "https://dl.dropboxusercontent.com/u/213392662/beach.jpg",
+			"captionTextToggle": "true",
+			"captionTextFont": "sans-serif",
+			"captionTextSize": "30px",
+			"captionTextColor": "#fff",
+			"captionTextAlign": "left",
+			"captionBackgroundColor": "",
+			"captionPosition": "top",
+			"captionContent": "Next up for production at Local Motors: The Verrada. A motorized drift tricycle designed by one of the Local Motors employees."
+		}
+		
+	]
+}
