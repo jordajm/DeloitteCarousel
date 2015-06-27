@@ -4,6 +4,7 @@
 
         csConfig: undefined,
         csCarousel: undefined,
+        carouselChanged: undefined,
         cardCount: undefined,
         currentCard: undefined,
         autoplay: undefined,
@@ -28,7 +29,7 @@
     },
  
     getConfig: function() {
-        $.get('/infographics/55689c84b00e4/assets/testConfig.json', function(data){ 
+        $.get('/infographics/557ef52629015/assets/youtubeTestConfig.json', function(data){ 
         }).success(function(data) {
             App.csConfig = data;
             console.log(App.csConfig);
@@ -71,14 +72,14 @@
                 if(thisItem.captionTextToggle && thisItem.captionTextToggle == 'true'){
                     if(thisItem.podcastURL){
                         // Image + Caption + Podcast
-                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption" style="' + thisItem.captionPosition + ':0px;background-color:' + thisItem.captionBackgroundColor + '"><p class="cs-caption-text" style="color:' + thisItem.captionTextColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';text-align:' + thisItem.captionTextAlign + '">' + thisItem.captionContent + '</p></div><iframe style="border:none;width:75%;position:absolute;bottom:0;left:12.5%" src="' + thisItem.podcastURL + '" height="100" width="640" scrolling="no"></iframe></div>';
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption ' + thisItem.captionBGClass + '"><p class="cs-caption-text ' + thisItem.captionTextClass + '">' + thisItem.captionContent + '</p></div><iframe style="border:none;width:75%;position:absolute;bottom:0;left:12.5%" src="' + thisItem.podcastURL + '" height="100" width="640" scrolling="no"></iframe></div>';
                     }else if(thisItem.audioSnippetURL){
                         // Image + Caption + Audio Snippet which plays when slide comes into view
-                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption" style="' + thisItem.captionPosition + ':0px;background-color:' + thisItem.captionBackgroundColor + '"><p class="cs-caption-text" style="color:' + thisItem.captionTextColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';text-align:' + thisItem.captionTextAlign + '">' + thisItem.captionContent + '</p></div></div>';
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption ' + thisItem.captionBGClass + '"><p class="cs-caption-text ' + thisItem.captionTextClass + '">' + thisItem.captionContent + '</p></div></div>';
                         App.audioSnippets.push({slideNum: (i + 1), url: thisItem.audioSnippetURL});
                     }else{
                         // Image + Caption
-                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption" style="' + thisItem.captionPosition + ':0px;background-color:' + thisItem.captionBackgroundColor + '"><p class="cs-caption-text" style="color:' + thisItem.captionTextColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';text-align:' + thisItem.captionTextAlign + '">' + thisItem.captionContent + '</p></div></div>';
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption ' + thisItem.captionBGClass + '"><p class="cs-caption-text ' + thisItem.captionTextClass + '">' + thisItem.captionContent + '</p></div></div>';
                     }
                 }else{
                     if(thisItem.podcastURL){
@@ -100,7 +101,7 @@
             }
             if(thisItem.videoURL){
                 // Video
-                itemHTML = '<div class="cs-card-content"><div class="cs-embed-container"><iframe src="' + thisItem.videoURL + '" frameborder="0" allowfullscreen></iframe></div></div>';
+                itemHTML = '<div class="cs-card-content"><div class="cs-embed-container"><div class="video-embed-container"><iframe src="' + thisItem.videoURL + '" style="border:0" allowfullscreen></iframe></div></div></div>';
             }
 
             // Should this item be played automatically when it comes into view? - Create an array that can be looped through each time the carousel changes selected item
@@ -120,15 +121,23 @@
         App.csCarousel = $('.cs-carousel').owlCarousel(App.csOptions);
 
         $('.cs-prev-btn').click(function(){
-            App.csCarousel.trigger('prev.owl.carousel')
+            App.csCarousel.trigger('prev.owl.carousel');
         });
 
         $('.cs-next-btn').click(function(){
-            App.csCarousel.trigger('next.owl.carousel')
+            App.csCarousel.trigger('next.owl.carousel');
         });
 
         App.csCarousel.on('changed.owl.carousel', function() {
             setTimeout(function(){
+                if(!App.carouselChanged){
+                    $('.cs-carousel').mouseover(function(){
+                        $('.owl-prev, .owl-next').css('opacity', '0.4');
+                    });
+                    $('.cs-carousel').mouseout(function(){
+                        $('.owl-prev, .owl-next').css('opacity', '0');
+                    });
+                }
                 App.getCurrentCardIndex();
             },0);
         });

@@ -1,6 +1,130 @@
+body {
+  background-color:#f1f1f1;
+  background: url("http://dupress.com/wp-content/uploads/2015/06/LM_plant-floor-grayscale.jpg") no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+}   
+
+h1 {
+  font-size:3em;
+  font-weight:bold;
+  
+}
+
+.infographic-iframe { max-height:720px; overflow:hidden; }
+    
+/*====================================================*/
+/*------------ Caption Styling from Config------------*/
+
+/* For background colors you have to use RGBA format, for example "background-color: rgba(0, 0, 0, 0.5);" for black with 50% opacity. 
+   For more info see: http://www.webopacity.net/RGBA.html
+*/
+.body-text-bg-bottom,
+.body-text-bg-top {
+  background: rgba(0,0,0,0.7);
+  width:100%;  
+  padding:2% 12%;
+}
+
+.body-text-bg-bottom {
+  bottom:0;
+  position:absolute;
+}
+
+.body-text-bg-top {
+  top:0;
+}
+
+.body-text-bg-center {
+  background: rgba(0,0,0,0.7);
+    width:80%;
+  -webkit-transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    -moz-transform: translate(0%, -50%);
+    transform: translate(0%, -50%);  
+    position: absolute;
+    top: 50%;
+  left:10%;
+    padding:2% 4%;
+}
+
+
+
+
+.cs-caption-text, .body-text,
+.cs-caption p {
+    font-family: "source-sans-pro", sans-serif;
+    font-weight:300;
+    font-size: 1.75em;
+  line-height:1.5em;
+    color: #f1f1f1;
+    text-align:center;
+}
+
+.cs-caption h1 {
+  font-size:3em;
+  font-weight:600;
+  text-align:center;
+  color:#f1f1f1;
+}
+
+.its-an-experience-bg {
+  bottom: 0;
+  position: absolute;
+
+}
+
+.its-an-experience {
+  color: #fff;
+  font-size: 3em !important;
+  font-family: serif !important;
+  text-align: right;
+  text-shadow: 1px 1px 8px #000000;
+  margin-left:35%;
+}
+
+.next-up-bg {
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+}
+
+.next-up {
+  color: #fff;
+  text-align: left;
+  font-weight: 100;
+}
+
+.next-car-bg {
+  top: 0;
+}
+
+
+/*====================================================*/
+
+
+.video-embed-container { 
+  position: relative; 
+  padding-bottom: 56.25%; 
+  height: 0; overflow: 
+    hidden; max-width: 100%; 
+}
+
+.video-embed-container iframe, .video-embed-container object, .video-embed-container embed { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  overflow:hidden;
+  padding:0;
+  margin:0;
+  
+}  
+
 #cs-placeholder {
   visibility: hidden;
 }
+
 
 .cs-carousel {
   max-width: 1280px;
@@ -9,88 +133,111 @@
 }
 
 .cs-card-content {
-	position: relative;
-	width: 100%;
-	height: 423px;
-	background-repeat: no-repeat;
-	background-size: 100%;
+  position: relative;
+  width: 100%;
+  height: 423px;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .cs-card-nav-btn:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .cs-nav-disabled {
-	display: none !important;
+  display: none !important;
 }
 
 .cs-nav-disabled:hover {
-	cursor: default !important;
+  cursor: default !important;
 }
 
 .owl-controls .owl-prev, .owl-controls .owl-next {
-	position: absolute;
-	top: 0;
-	width: 12%;
-	max-width: 90px;
-  	height: 100%;
-  	opacity: 0;
-  	background-color: lightgrey;
+  position: absolute;
+  top: 0;
+  width: 12%;
+  max-width: 90px;
+    height: 100%;
+    opacity: 0.4;
+    background-color: lightgrey;
     border-radius: 10px;
     background-position: center center;
 
-  	-webkit-transition: opacity 500ms ease-out;
+    -webkit-transition: opacity 500ms ease-out;
     -moz-transition: opacity 500ms ease-out;
     -o-transition: opacity 500ms ease-out;
     transition: opacity 500ms ease-out;
 }
 
 .cs-carousel:hover .owl-controls .owl-prev {
-	opacity: 0.4;
+  opacity: 0.4;
 }
 
 .cs-carousel:hover .owl-controls .owl-next {
-	opacity: 0.4;
+  opacity: 0.4;
 }
 
-@media (max-width: 768px) and (min-width: 0px)  {
-  .owl-controls .owl-prev {
+@media (max-width: 1024px) {
+
+  .cs-caption-text, .body-text,
+  .cs-caption p {
+        font-size: 1.35em;
+    line-height:1.5em;
+    
+  }
+  .cs-caption h1 {
+    font-size:2.25em;
+    
+    margin:0 !important;
+  }
+  
+}
+@media (max-width: 600px)  {
+  /*.owl-controls .owl-prev {
       opacity: 0.4;
   }
   
   .owl-controls .owl-next {
       opacity: 0.4;
+  }*/
+  
+  .cs-caption-text, .body-text,
+  .cs-caption p {
+        font-size: .9em;
+    line-height:1.1em;
+    margin:0 !important;
   }
+  .cs-caption h1 {
+    font-size:1.1em;
+    margin:0 0 -10px 0 !important;
+  }
+  
 }
 
 .owl-controls .owl-prev {
-	left: 0;
+  left: 0;
 }
 
 .owl-controls .owl-next {
-	right: 0;
+  right: 0;
 }
 
 .owl-prev:hover {
-	opacity: 0.7 !important;
+  opacity: 0.7 !important;
 }
 
 .owl-next:hover {
-	opacity: 0.7 !important;
+  opacity: 0.7 !important;
 }
 
 .owl-prev {
-	background-image: url('https://dl.dropboxusercontent.com/u/213392662/DUPressCarousel/dependencies/chevron-left.png');
-	background-repeat: no-repeat;
-	background-size: 50%;
+  background-image: url('https://dl.dropboxusercontent.com/u/213392662/DUPressCarousel/dependencies/chevron-left.png');
+  background-repeat: no-repeat;
+  background-size: 50%;
 }
 
 .owl-next {
-	background-image: url('https://dl.dropboxusercontent.com/u/213392662/DUPressCarousel/dependencies/chevron-right.png');
-	background-repeat: no-repeat;
-	background-size: 50%;
-}
-
-.cs-caption-text {
-	padding: 2% 5%;
+  background-image: url('https://dl.dropboxusercontent.com/u/213392662/DUPressCarousel/dependencies/chevron-right.png');
+  background-repeat: no-repeat;
+  background-size: 50%;
 }

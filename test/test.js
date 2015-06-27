@@ -28,7 +28,7 @@
     },
  
     getConfig: function() {
-        $.get('/infographics/55689c84b00e4/assets/testConfig.json', function(data){ 
+        $.get('/infographics/55689c84b00e4/assets/configTestingCaptionClasses.json', function(data){ 
         }).success(function(data) {
             App.csConfig = data;
             console.log(App.csConfig);
@@ -71,14 +71,14 @@
                 if(thisItem.captionTextToggle && thisItem.captionTextToggle == 'true'){
                     if(thisItem.podcastURL){
                         // Image + Caption + Podcast
-                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption" style="' + thisItem.captionPosition + ':0px;background-color:' + thisItem.captionBackgroundColor + '"><p class="cs-caption-text" style="color:' + thisItem.captionTextColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';text-align:' + thisItem.captionTextAlign + '">' + thisItem.captionContent + '</p></div><iframe style="border:none;width:75%;position:absolute;bottom:0;left:12.5%" src="' + thisItem.podcastURL + '" height="100" width="640" scrolling="no"></iframe></div>';
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption ' + thisItem.captionBGClass + '"><p class="cs-caption-text ' + thisItem.captionTextClass + '">' + thisItem.captionContent + '</p></div><iframe style="border:none;width:75%;position:absolute;bottom:0;left:12.5%" src="' + thisItem.podcastURL + '" height="100" width="640" scrolling="no"></iframe></div>';
                     }else if(thisItem.audioSnippetURL){
                         // Image + Caption + Audio Snippet which plays when slide comes into view
-                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption" style="' + thisItem.captionPosition + ':0px;background-color:' + thisItem.captionBackgroundColor + '"><p class="cs-caption-text" style="color:' + thisItem.captionTextColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';text-align:' + thisItem.captionTextAlign + '">' + thisItem.captionContent + '</p></div></div>';
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption ' + thisItem.captionBGClass + '"><p class="cs-caption-text ' + thisItem.captionTextClass + '">' + thisItem.captionContent + '</p></div></div>';
                         App.audioSnippets.push({slideNum: (i + 1), url: thisItem.audioSnippetURL});
                     }else{
                         // Image + Caption
-                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption" style="' + thisItem.captionPosition + ':0px;background-color:' + thisItem.captionBackgroundColor + '"><p class="cs-caption-text" style="color:' + thisItem.captionTextColor + ';font-family:' + thisItem.captionTextFont + ';font-size:' + thisItem.captionTextSize + ';text-align:' + thisItem.captionTextAlign + '">' + thisItem.captionContent + '</p></div></div>';
+                        itemHTML = '<div class="cs-card-content" style="background-image:url(' + thisItem.imageURL + ')"><div class="cs-caption ' + thisItem.captionBGClass + '"><p class="cs-caption-text ' + thisItem.captionTextClass + '">' + thisItem.captionContent + '</p></div></div>';
                     }
                 }else{
                     if(thisItem.podcastURL){
